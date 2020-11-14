@@ -1,8 +1,8 @@
 import {createEffect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {ProductsService} from '../../service/products.service';
-import {loadProducts, setProducts} from '../actions/products.action';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {loadProduct, loadProducts, setProduct, setProducts} from '../actions/products.action';
+import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 import {EMPTY} from 'rxjs';
 import {Actions} from '@ngrx/effects';
 
@@ -13,6 +13,15 @@ export class ProductsEffect {
       ofType(loadProducts),
       mergeMap((action) => this.productsService.getProducts(action.pageNumber).pipe(
         map(products => setProducts({products})),
+        catchError(() => EMPTY)
+      ))
+    );
+  });
+  loadProductEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadProduct),
+      switchMap((action) => this.productsService.getProduct(action.id).pipe(
+        map(product => setProduct({product})),
         catchError(() => EMPTY)
       ))
     );
