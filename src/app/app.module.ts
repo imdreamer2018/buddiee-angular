@@ -11,7 +11,7 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import {AppRoutingModule} from './app-routing.module';
+import {AppRoutingModule} from './module/app-routing/app-routing.module';
 
 registerLocaleData(zh);
 
