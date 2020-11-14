@@ -21,9 +21,15 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
+              "src/theme.less",
               "src/styles.css"
             ],
             "scripts": []
@@ -120,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "buddiee-website"
+  "defaultProject": "buddiee-website",
+  "cli": {
+    "analytics": "a6faa535-2647-430a-9886-bf1cadc04484"
+  }
 }
