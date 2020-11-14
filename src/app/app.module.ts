@@ -12,6 +12,8 @@ import zh from '@angular/common/locales/zh';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import {AppRoutingModule} from './module/app-routing/app-routing.module';
+import {AppStoreModule} from './module/app-store/app-store.module';
+import {RebirthHttpModule} from '@ng-zorro/rebirth-http';
 
 registerLocaleData(zh);
 
@@ -24,8 +26,10 @@ registerLocaleData(zh);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AppStoreModule,
     FormsModule,
     HttpClientModule,
+    RebirthHttpModule,
     BrowserAnimationsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
