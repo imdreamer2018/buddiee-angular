@@ -16,13 +16,15 @@ export class ProductCreateComponent implements OnInit {
   validateForm!: FormGroup;
   previewImage: string | undefined = '';
   uploadImage: string | undefined = '';
-  acceptFileType: 'image/jpeg,image/png,image/jpg';
+  acceptFileType: string;
   previewVisible = false;
   fileList: NzUploadFile[] = [];
   constructor(private fb: FormBuilder,
               private message: NzMessageService,
               private productsService: ProductsService,
-              private router: Router) { }
+              private router: Router) {
+    this.acceptFileType = 'image/jpeg,image/png,image/jpg';
+  }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
