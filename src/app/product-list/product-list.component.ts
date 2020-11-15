@@ -27,4 +27,8 @@ export class ProductListComponent implements OnInit {
   pageIndexChange($event: number): void {
     this.store.dispatch(loadProducts({pageNumber: $event}));
   }
+
+  onCreateProduct(): void {
+    this.router.navigate(['/product/create']);
+  }
 }
