@@ -25,6 +25,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzInputNumberModule} from 'ng-zorro-antd/input-number';
+import {NzUploadModule} from 'ng-zorro-antd/upload';
+import {NzMessageModule} from 'ng-zorro-antd/message';
+import {NzTypographyModule} from 'ng-zorro-antd/typography';
 
 registerLocaleData(zh);
 
@@ -54,6 +57,9 @@ registerLocaleData(zh);
     ReactiveFormsModule,
     NzInputModule,
     NzInputNumberModule,
+    NzUploadModule,
+    NzMessageModule,
+    NzTypographyModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

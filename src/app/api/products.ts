@@ -8,15 +8,25 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ProductsApi {
-  BASE_URL: 'http://127.0.0.1:8080';
+  BASE_URL: string;
+  header: object;
   constructor(private http: HttpClient) {
+    this.BASE_URL = 'http://127.0.0.1:8080';
+    this.header = {
+      Accept: 'application/json;charset=UTF-8',
+     'Content-Type': 'application/json',
+    };
   }
 
   getProducts(pageNumber: number, pageSize: number): Observable<Page<Product[]>> {
-      return this.http.get<Page<Product[]>>(`http://127.0.0.1:8080/products?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+      return this.http.get<Page<Product[]>>(`${this.BASE_URL}/products?pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`http://127.0.0.1:8080/products/${id}`);
+    return this.http.get<Product>(`${this.BASE_URL}/products/${id}`);
+  }
+
+  createProduct(product: Product): Observable<any> {
+    return this.http.post<Product>(`${this.BASE_URL}/products`, product, this.header);
   }
 }

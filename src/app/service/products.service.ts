@@ -19,4 +19,8 @@ export class ProductsService {
   getProduct(id): Observable<Product> {
     return this.productsApi.getProduct(id);
   }
+
+  createProduct(product: { price: number; imageUrl: string; name: string; description: string }): Observable<Product> {
+    return this.productsApi.createProduct(product);
+  }
 }
