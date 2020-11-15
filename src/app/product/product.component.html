@@ -2,7 +2,7 @@
   <nz-card style="width:240px;"
            [nzCover]="coverTemplate"
            nzHoverable
-           [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+           [nzActions]="[actionEdit, actionDelete, actionEllipsis]">
     <nz-card-meta
       nzTitle="{{product.name}}"
       nzDescription="{{product.description}}"></nz-card-meta>
@@ -11,11 +11,19 @@
   <ng-template #coverTemplate>
     <img alt="example" src="{{product.imageUrl}}"  (click)="productDetail()" />
   </ng-template>
-  <ng-template #actionSetting>
-    <i nz-icon nzType="setting"></i>
-  </ng-template>
   <ng-template #actionEdit>
     <i nz-icon nzType="edit"></i>
+  </ng-template>
+  <ng-template #actionDelete>
+    <a
+      nz-popconfirm
+      nzPopconfirmTitle="您确认要删除该商品吗？"
+      nzPopconfirmPlacement="topLeft"
+      (nzOnConfirm)="confirmDelete()"
+      (nzOnCancel)="cancelDelete()"
+    >
+      <i nz-icon nzType="delete"></i>
+    </a>
   </ng-template>
   <ng-template #actionEllipsis>
     <i nz-icon nzType="ellipsis"></i>

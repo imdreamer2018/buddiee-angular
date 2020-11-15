@@ -28,6 +28,7 @@ import {NzInputNumberModule} from 'ng-zorro-antd/input-number';
 import {NzUploadModule} from 'ng-zorro-antd/upload';
 import {NzMessageModule} from 'ng-zorro-antd/message';
 import {NzTypographyModule} from 'ng-zorro-antd/typography';
+import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 
 registerLocaleData(zh);
 
@@ -60,6 +61,7 @@ registerLocaleData(zh);
     NzUploadModule,
     NzMessageModule,
     NzTypographyModule,
+    NzPopconfirmModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

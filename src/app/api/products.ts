@@ -29,4 +29,8 @@ export class ProductsApi {
   createProduct(product: Product): Observable<any> {
     return this.http.post<Product>(`${this.BASE_URL}/products`, product, this.header);
   }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}/products/${id}`);
+  }
 }

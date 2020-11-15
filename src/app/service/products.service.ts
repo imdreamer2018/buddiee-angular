@@ -23,4 +23,8 @@ export class ProductsService {
   createProduct(product: { price: number; imageUrl: string; name: string; description: string }): Observable<Product> {
     return this.productsApi.createProduct(product);
   }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.productsApi.deleteProduct(id);
+  }
 }
