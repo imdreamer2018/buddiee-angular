@@ -1,3 +1,4 @@
 <div class="product-list">
   <app-product *ngFor="let product of products.data" [product]="product" ></app-product>
 </div>
+<nz-pagination class="product-list-pagination" [nzPageIndex]="products.currentPage" [nzTotal]="products.totalPage * 10"></nz-pagination>

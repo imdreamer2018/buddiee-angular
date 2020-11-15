@@ -1,5 +1,11 @@
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.product-list-pagination {
+  margin-top: 2%;
+  display: flex;
+  justify-content: flex-end;
 }

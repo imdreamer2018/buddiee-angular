@@ -17,6 +17,7 @@ import {NzLayoutModule} from 'ng-zorro-antd/layout';
 import {NzMenuModule} from 'ng-zorro-antd/menu';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { ProductComponent } from './product/product.component';
+import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 
 registerLocaleData(zh);
 
@@ -36,7 +37,8 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     NzLayoutModule,
     NzMenuModule,
-    NzCardModule
+    NzCardModule,
+    NzPaginationModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
