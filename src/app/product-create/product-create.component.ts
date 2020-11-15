@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import {NzUploadFile} from 'ng-zorro-antd/upload';
+import {NzUploadChangeParam, NzUploadFile} from 'ng-zorro-antd/upload';
 import {getFileBase64} from '../util/geFileBase64';
 import {ProductsService} from '../service/products.service';
-import {ok} from 'assert';
 import {Router} from '@angular/router';
 
 @Component({
@@ -16,6 +15,8 @@ export class ProductCreateComponent implements OnInit {
 
   validateForm!: FormGroup;
   previewImage: string | undefined = '';
+  uploadImage: string | undefined = '';
+  acceptFileType: 'image/jpeg,image/png,image/jpg';
   previewVisible = false;
   fileList: NzUploadFile[] = [];
   constructor(private fb: FormBuilder,
@@ -39,7 +40,7 @@ export class ProductCreateComponent implements OnInit {
       {
         name: value.name,
         description: value.description,
-        imageUrl: this.previewImage,
+        imageUrl: this.uploadImage,
         price: value.price}).subscribe(
       () => {
             this.message.success('创建成功');
@@ -61,8 +62,15 @@ export class ProductCreateComponent implements OnInit {
       file.preview = await getFileBase64(file.originFileObj!);
     }
     this.previewImage = file.url || file.preview;
-    console.log(this.previewImage);
     this.previewVisible = true;
+  }
+  handleChange = async (file: NzUploadChangeParam) => {
+    if (file.file.status === 'done') {
+      if (!file.file.thumbUrl) {
+        file.file.upload = await getFileBase64(file.file.originFileObj);
+      }
+    }
+    this.uploadImage = file.file.thumbUrl || file.file.upload;
   }
 
 }

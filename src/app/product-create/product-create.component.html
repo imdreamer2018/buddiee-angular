@@ -27,6 +27,8 @@
         [(nzFileList)]="fileList"
         [nzShowButton]="fileList.length < 1"
         [nzPreview]="handlePreview"
+        [nzAccept]="acceptFileType"
+        (nzChange)="handleChange($event)"
       >
         <div>
           <i nz-icon nzType="plus"></i>
