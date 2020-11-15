@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from '../product';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -9,9 +11,13 @@ import {Product} from '../product';
 export class ProductComponent implements OnInit {
 
   @Input() product: Product;
-  constructor() { }
+  constructor(private message: NzMessageService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  productDetail(): void {
+    this.router.navigate([`products/${this.product.id}`]);
+  }
 }

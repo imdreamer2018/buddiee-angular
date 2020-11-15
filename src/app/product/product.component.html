@@ -1,6 +1,7 @@
 <div class="product">
   <nz-card style="width:240px;"
            [nzCover]="coverTemplate"
+           nzHoverable
            [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
     <nz-card-meta
       nzTitle="{{product.name}}"
@@ -8,7 +9,7 @@
     <p>{{product.price | currency:'CNY'}}</p>
   </nz-card>
   <ng-template #coverTemplate>
-    <img alt="example" src="{{product.imageUrl}}" />
+    <img alt="example" src="{{product.imageUrl}}"  (click)="productDetail()" />
   </ng-template>
   <ng-template #actionSetting>
     <i nz-icon nzType="setting"></i>
