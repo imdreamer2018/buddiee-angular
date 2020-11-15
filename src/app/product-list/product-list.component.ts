@@ -24,4 +24,7 @@ export class ProductListComponent implements OnInit {
     this.store.dispatch(loadProducts({pageNumber: this.currentPage}));
   }
 
+  pageIndexChange($event: number): void {
+    this.store.dispatch(loadProducts({pageNumber: $event}));
+  }
 }
