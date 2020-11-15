@@ -7,13 +7,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import {AppRoutingModule} from './module/app-routing/app-routing.module';
 import {AppStoreModule} from './module/app-store/app-store.module';
-import {RebirthHttpModule} from '@ng-zorro/rebirth-http';
+import {NzLayoutModule} from 'ng-zorro-antd/layout';
+import {NzMenuModule} from 'ng-zorro-antd/menu';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { ProductComponent } from './product/product.component';
 
 registerLocaleData(zh);
 
@@ -21,7 +24,8 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     ProductListComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -29,8 +33,10 @@ registerLocaleData(zh);
     AppStoreModule,
     FormsModule,
     HttpClientModule,
-    RebirthHttpModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzCardModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
