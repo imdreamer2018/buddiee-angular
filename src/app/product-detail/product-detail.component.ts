@@ -3,7 +3,7 @@ import {Product} from '../product';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {selectorProduct} from '../store/selectors/products.selector';
-import {map, mergeMap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {loadProduct} from '../store/actions/products.action';
 
 @Component({
