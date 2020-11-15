@@ -1,7 +1,22 @@
-<nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
-  <nz-card-meta nzTitle="{{product.name}}" nzDescription="{{product.description}}"></nz-card-meta>
-  <p>{{product.price | currency:'CNY'}}</p>
-</nz-card>
-<ng-template #coverTemplate>
-  <img alt="example" src="{{product.imageUrl}}" />
-</ng-template>
+<div class="product">
+  <nz-card style="width:240px;"
+           [nzCover]="coverTemplate"
+           [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+    <nz-card-meta
+      nzTitle="{{product.name}}"
+      nzDescription="{{product.description}}"></nz-card-meta>
+    <p>{{product.price | currency:'CNY'}}</p>
+  </nz-card>
+  <ng-template #coverTemplate>
+    <img alt="example" src="{{product.imageUrl}}" />
+  </ng-template>
+  <ng-template #actionSetting>
+    <i nz-icon nzType="setting"></i>
+  </ng-template>
+  <ng-template #actionEdit>
+    <i nz-icon nzType="edit"></i>
+  </ng-template>
+  <ng-template #actionEllipsis>
+    <i nz-icon nzType="ellipsis"></i>
+  </ng-template>
+</div>
