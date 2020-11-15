@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -19,6 +19,12 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { ProductComponent } from './product/product.component';
 import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 import {NzIconModule} from 'ng-zorro-antd/icon';
+import {NzButtonModule} from 'ng-zorro-antd/button';
+import {NzModalModule} from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { ProductCreateComponent } from './product-create/product-create.component';
+import {NzInputModule} from 'ng-zorro-antd/input';
+import {NzInputNumberModule} from 'ng-zorro-antd/input-number';
 
 registerLocaleData(zh);
 
@@ -27,7 +33,8 @@ registerLocaleData(zh);
     AppComponent,
     ProductListComponent,
     ProductDetailComponent,
-    ProductComponent
+    ProductComponent,
+    ProductCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +47,13 @@ registerLocaleData(zh);
     NzMenuModule,
     NzCardModule,
     NzPaginationModule,
-    NzIconModule
+    NzIconModule,
+    NzButtonModule,
+    NzModalModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzInputNumberModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
