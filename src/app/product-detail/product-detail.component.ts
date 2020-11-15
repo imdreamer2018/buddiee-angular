@@ -20,7 +20,6 @@ export class ProductDetailComponent implements OnInit {
     this.store.select(selectorProduct).subscribe(product => this.product = product);
     this.route.paramMap.pipe(
       map(paramMap => Number(paramMap.get('id'))),
-      map(id => id)
     ).subscribe(id => {
       this.store.dispatch(loadProduct({id}));
     });
