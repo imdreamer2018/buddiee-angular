@@ -11,7 +11,7 @@ export class ProductsApi {
   BASE_URL: string;
   header: object;
   constructor(private http: HttpClient) {
-    this.BASE_URL = 'http://127.0.0.1:8080';
+    this.BASE_URL = 'http://127.0.0.1:4200';
     this.header = {
       Accept: 'application/json;charset=UTF-8',
      'Content-Type': 'application/json',
