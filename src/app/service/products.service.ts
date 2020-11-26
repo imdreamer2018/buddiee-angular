@@ -20,7 +20,7 @@ export class ProductsService {
     return this.productsApi.getProduct(id);
   }
 
-  createProduct(product: { price: number; imageUrl: string; name: string; description: string }): Observable<Product> {
+  createProduct(product: Product): Observable<Product> {
     return this.productsApi.createProduct(product);
   }
 

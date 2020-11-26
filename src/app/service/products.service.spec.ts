@@ -3,6 +3,7 @@ import {Product} from '../product';
 import {ProductsApi} from '../api/products';
 import {Page} from '../page';
 import {of} from 'rxjs';
+import BigNumber from 'bignumber.js';
 
 describe('ProductsService', () => {
   const mockProducts: Page<Product[]> = {
@@ -14,14 +15,14 @@ describe('ProductsService', () => {
         name: '雪碧',
         description: '大声你的逼逼',
         imageUrl: 'http://####',
-        price: 2.5,
+        price: new BigNumber(2.5),
       },
       {
         id: 2,
         name: '可乐',
         description: '快乐水',
         imageUrl: 'http://####',
-        price: 2.5,
+        price: new BigNumber(2.5),
       },
     ]
   };
@@ -30,13 +31,13 @@ describe('ProductsService', () => {
     name: '雪碧',
     description: '大声你的逼逼',
     imageUrl: 'http://####',
-    price: 2.5,
+    price: new BigNumber(2.5),
   };
   const productRequest: Product = {
     name: '雪碧',
     description: '大声你的逼逼',
     imageUrl: 'http://####',
-    price: 2.5,
+    price: new BigNumber(2.5),
   };
   const setUp = () => {
     const productsApiSpy = jasmine.createSpyObj(

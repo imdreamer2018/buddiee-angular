@@ -6,13 +6,13 @@
     <nz-card-meta
       nzTitle="{{product.name}}"
       nzDescription="{{product.description}}"></nz-card-meta>
-    <p>{{product.price | currency:'CNY'}}</p>
+    <p>{{product.price.toString() | currency:'CNY'}}</p>
   </nz-card>
   <ng-template #coverTemplate>
     <img alt="example" src="{{product.imageUrl}}"  (click)="productDetail()" />
   </ng-template>
   <ng-template #actionEdit>
-    <i nz-icon nzType="edit"></i>
+    <em nz-icon nzType="edit"></em>
   </ng-template>
   <ng-template #actionDelete>
     <a
@@ -22,10 +22,10 @@
       (nzOnConfirm)="confirmDelete()"
       (nzOnCancel)="cancelDelete()"
     >
-      <i nz-icon nzType="delete"></i>
+      <em nz-icon nzType="delete"></em>
     </a>
   </ng-template>
   <ng-template #actionEllipsis>
-    <i nz-icon nzType="ellipsis"></i>
+    <em nz-icon nzType="ellipsis"></em>
   </ng-template>
 </div>

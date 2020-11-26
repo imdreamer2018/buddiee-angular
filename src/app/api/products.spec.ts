@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Page} from '../page';
 import {Product} from '../product';
+import BigNumber from 'bignumber.js';
 
 describe('product api', () => {
   const mockProducts: Page<Product[]> = {
@@ -15,14 +16,14 @@ describe('product api', () => {
         name: '雪碧',
         description: '大声你的逼逼',
         imageUrl: 'http://####',
-        price: 2.5,
+        price: new BigNumber(2.5),
       },
       {
         id: 2,
         name: '可乐',
         description: '快乐水',
         imageUrl: 'http://####',
-        price: 2.5,
+        price: new BigNumber(2.5),
       },
     ]
   };
@@ -31,13 +32,13 @@ describe('product api', () => {
     name: '雪碧',
     description: '大声你的逼逼',
     imageUrl: 'http://####',
-    price: 2.5,
+    price: new BigNumber(2.5),
   };
   const productRequest: Product = {
     name: '脉动',
     description: '大声你的逼逼',
     imageUrl: 'http://####',
-    price: 2.5,
+    price: new BigNumber(2.5),
   };
   const productByIdTestUrl = '/products/1';
   let http: HttpClient;
@@ -81,7 +82,7 @@ describe('product api', () => {
 
     http.get<Product>(productByIdTestUrl)
       .subscribe(
-        product => fail('should have failed with 404 error'),
+        () => fail('should have failed with 404 error'),
         (error: HttpErrorResponse) => {
           expect(error.status).toEqual(404, 'status');
           expect(error.error).toEqual(emsg, 'message');

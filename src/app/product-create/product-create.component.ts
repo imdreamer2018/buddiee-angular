@@ -5,6 +5,7 @@ import {NzUploadChangeParam, NzUploadFile} from 'ng-zorro-antd/upload';
 import {getFileBase64} from '../util/geFileBase64';
 import {ProductsService} from '../service/products.service';
 import {Router} from '@angular/router';
+import BigNumber from 'bignumber.js';
 
 @Component({
   selector: 'app-product-create',
@@ -43,7 +44,7 @@ export class ProductCreateComponent implements OnInit {
         name: value.name,
         description: value.description,
         imageUrl: this.uploadImage,
-        price: value.price}).subscribe(
+        price: new BigNumber(value.price)}).subscribe(
       () => {
             this.message.success('创建成功');
             this.router.navigate(['/products']);
@@ -61,7 +62,7 @@ export class ProductCreateComponent implements OnInit {
 
   handlePreview = async (file: NzUploadFile) => {
     if (!file.url && !file.preview) {
-      file.preview = await getFileBase64(file.originFileObj!);
+      file.preview = await getFileBase64(file.originFileObj);
     }
     this.previewImage = file.url || file.preview;
     this.previewVisible = true;
