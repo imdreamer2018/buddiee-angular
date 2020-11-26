@@ -5,7 +5,7 @@ import {Page} from '../page';
 import {of} from 'rxjs';
 
 describe('ProductsService', () => {
-  const products: Page<Product[]> = {
+  const mockProducts: Page<Product[]> = {
     currentPage: 1,
     totalPage: 10,
     data: [
@@ -25,7 +25,7 @@ describe('ProductsService', () => {
       },
     ]
   };
-  const product: Product = {
+  const mockProduct: Product = {
     id: 1,
     name: '雪碧',
     description: '大声你的逼逼',
@@ -54,18 +54,18 @@ describe('ProductsService', () => {
 
   it('should return products page when get products by pageNumber and pageSize', () => {
     const { service, productsApiSpy } = setUp();
-    productsApiSpy.getProducts.and.returnValue(of(products));
+    productsApiSpy.getProducts.and.returnValue(of(mockProducts));
     service.getProducts(1).subscribe(productsResponse => {
-      expect(productsResponse).toEqual(products);
+      expect(productsResponse).toEqual(mockProducts);
     });
     expect(productsApiSpy.getProducts).toHaveBeenCalledTimes(1);
   });
 
   it('should return product detail when get product by id', () => {
     const { service, productsApiSpy } = setUp();
-    productsApiSpy.getProduct.and.returnValue(of(product));
+    productsApiSpy.getProduct.and.returnValue(of(mockProduct));
     service.getProduct(1).subscribe(productResponse => {
-      expect(productResponse).toEqual(product);
+      expect(productResponse).toEqual(mockProduct);
     });
     expect(productsApiSpy.getProduct).toHaveBeenCalledWith(1);
     expect(productsApiSpy.getProduct).toHaveBeenCalledTimes(1);
@@ -73,9 +73,9 @@ describe('ProductsService', () => {
 
   it('should return product info when create product', () => {
     const { service, productsApiSpy } = setUp();
-    productsApiSpy.createProduct.withArgs(productRequest).and.returnValue(of(product));
+    productsApiSpy.createProduct.withArgs(productRequest).and.returnValue(of(mockProduct));
     service.createProduct(productRequest).subscribe(productResponse => {
-      expect(productResponse).toEqual(product);
+      expect(productResponse).toEqual(mockProduct);
     });
     expect(productsApiSpy.createProduct).toHaveBeenCalledWith(productRequest);
     expect(productsApiSpy.createProduct).toHaveBeenCalledTimes(1);
