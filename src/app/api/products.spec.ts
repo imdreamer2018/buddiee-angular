@@ -26,6 +26,13 @@ describe('product api', () => {
       },
     ]
   };
+  const mockProduct: Product = {
+    id: 1,
+    name: '雪碧',
+    description: '大声你的逼逼',
+    imageUrl: 'http://####',
+    price: 2.5,
+  };
   let http: HttpClient;
   let httpTestingController: HttpTestingController;
 
@@ -49,5 +56,15 @@ describe('product api', () => {
     const req = httpTestingController.expectOne('/products?pageNumber=1&pageSize=10');
     expect(req.request.method).toEqual('GET');
     req.flush(products);
+  });
+
+  it('should return product when get product by id', () => {
+    http.get<Product>('/products/1')
+      .subscribe(productResponse => {
+        expect(productResponse).toEqual(mockProduct);
+      });
+    const req = httpTestingController.expectOne('/products/1');
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockProduct);
   });
 });
