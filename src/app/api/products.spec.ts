@@ -67,4 +67,20 @@ describe('product api', () => {
     expect(req.request.method).toEqual('GET');
     req.flush(mockProduct);
   });
+
+  it('should return 404 error when get product by id and product is not existed', () => {
+    const emsg = 'can not find basic info of product with id is 1';
+
+    http.get<Product>('/products/1')
+      .subscribe(
+        product => fail('should have failed with 404 error'),
+        (error: HttpErrorResponse) => {
+          expect(error.status).toEqual(404, 'status');
+          expect(error.error).toEqual(emsg, 'message');
+        }
+      );
+
+    const req = httpTestingController.expectOne('/products/1');
+    req.flush(emsg, { status: 404, statusText: emsg});
+  });
 });
