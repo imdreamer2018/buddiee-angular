@@ -36,8 +36,14 @@ describe('ProductsService', () => {
     imageUrl: 'http://####',
     price: 2.5,
   };
+  const productRequest: Product = {
+    name: '雪碧',
+    description: '大声你的逼逼',
+    imageUrl: 'http://####',
+    price: 2.5,
+  };
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('ProductsApi', ['getProducts', 'getProduct']);
+    const spy = jasmine.createSpyObj('ProductsApi', ['getProducts', 'getProduct', 'createProduct']);
     TestBed.configureTestingModule({
       providers: [
         ProductsService,
@@ -67,5 +73,14 @@ describe('ProductsService', () => {
     });
     expect(productsApiSpy.getProduct).toHaveBeenCalledWith(1);
     expect(productsApiSpy.getProduct).toHaveBeenCalledTimes(1);
+  });
+
+  it('should return product info when create product', () => {
+    productsApiSpy.createProduct.withArgs(productRequest).and.returnValue(of(product));
+    service.createProduct(productRequest).subscribe(productResponse => {
+      expect(productResponse).toEqual(product);
+    });
+    expect(productsApiSpy.createProduct).toHaveBeenCalledWith(productRequest);
+    expect(productsApiSpy.createProduct).toHaveBeenCalledTimes(1);
   });
 });
