@@ -33,6 +33,12 @@ describe('product api', () => {
     imageUrl: 'http://####',
     price: 2.5,
   };
+  const productRequest: Product = {
+    name: '雪碧',
+    description: '大声你的逼逼',
+    imageUrl: 'http://####',
+    price: 2.5,
+  };
   let http: HttpClient;
   let httpTestingController: HttpTestingController;
 
@@ -84,5 +90,17 @@ describe('product api', () => {
 
     const req = httpTestingController.expectOne(getProductByIdTestUrl);
     req.flush(emsg, { status: 404, statusText: emsg});
+  });
+
+  it('should return product info when create product', () => {
+    http.post<Product>('/products', productRequest)
+      .subscribe(
+        productResponse => {
+          expect(productResponse).toEqual(mockProduct);
+        }
+      );
+    const req = httpTestingController.expectOne('/products');
+    expect(req.request.method).toEqual('POST');
+    req.flush(mockProduct);
   });
 });
