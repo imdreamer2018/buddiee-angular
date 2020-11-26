@@ -65,13 +65,13 @@ describe('product api', () => {
     req.flush(mockProducts);
   });
 
-  const getProductByIdTestUrl = '/products/1';
+  const ProductByIdTestUrl = '/products/1';
   it('should return product when get product by id', () => {
-    http.get<Product>(getProductByIdTestUrl)
+    http.get<Product>(ProductByIdTestUrl)
       .subscribe(productResponse => {
         expect(productResponse).toEqual(mockProduct);
       });
-    const req = httpTestingController.expectOne(getProductByIdTestUrl);
+    const req = httpTestingController.expectOne(ProductByIdTestUrl);
     expect(req.request.method).toEqual('GET');
     req.flush(mockProduct);
   });
@@ -79,7 +79,7 @@ describe('product api', () => {
   it('should return 404 error when get product by id and product is not existed', () => {
     const emsg = 'can not find basic info of product with id is 1';
 
-    http.get<Product>(getProductByIdTestUrl)
+    http.get<Product>(ProductByIdTestUrl)
       .subscribe(
         product => fail('should have failed with 404 error'),
         (error: HttpErrorResponse) => {
@@ -88,7 +88,7 @@ describe('product api', () => {
         }
       );
 
-    const req = httpTestingController.expectOne(getProductByIdTestUrl);
+    const req = httpTestingController.expectOne(ProductByIdTestUrl);
     req.flush(emsg, { status: 404, statusText: emsg});
   });
 
