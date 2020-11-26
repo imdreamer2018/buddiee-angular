@@ -43,7 +43,10 @@ describe('ProductsService', () => {
     price: 2.5,
   };
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('ProductsApi', ['getProducts', 'getProduct', 'createProduct']);
+    const spy = jasmine.createSpyObj(
+      'ProductsApi',
+      ['getProducts', 'getProduct',
+      'createProduct', 'deleteProduct']);
     TestBed.configureTestingModule({
       providers: [
         ProductsService,
@@ -82,5 +85,11 @@ describe('ProductsService', () => {
     });
     expect(productsApiSpy.createProduct).toHaveBeenCalledWith(productRequest);
     expect(productsApiSpy.createProduct).toHaveBeenCalledTimes(1);
+  });
+
+  it('delete product by id', () => {
+    service.deleteProduct(1);
+    expect(productsApiSpy.deleteProduct).toHaveBeenCalledWith(1);
+    expect(productsApiSpy.deleteProduct).toHaveBeenCalledTimes(1);
   });
 });
