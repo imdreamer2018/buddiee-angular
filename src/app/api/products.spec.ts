@@ -34,7 +34,7 @@ describe('product api', () => {
     price: 2.5,
   };
   const productRequest: Product = {
-    name: '雪碧',
+    name: '脉动',
     description: '大声你的逼逼',
     imageUrl: 'http://####',
     price: 2.5,
@@ -99,14 +99,15 @@ describe('product api', () => {
   });
 
   it('should return product info when create product', () => {
-    http.post<Product>('/products', productRequest)
+    http.post<Product>('/products', productRequest, { observe: 'response' })
       .subscribe(
         productResponse => {
-          expect(productResponse).toEqual(mockProduct);
+          expect(productResponse.status).toEqual(201);
+          expect(productResponse.body).toEqual(mockProduct);
         }
       );
     const req = httpTestingController.expectOne('/products');
     expect(req.request.method).toEqual('POST');
-    req.flush(mockProduct);
+    // req.flush(mockProduct);
   });
 });
