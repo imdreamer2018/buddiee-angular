@@ -6,7 +6,7 @@ import {Page} from '../page';
 import {Product} from '../product';
 
 describe('product api', () => {
-  const products: Page<Product[]> = {
+  const mockProducts: Page<Product[]> = {
     currentPage: 1,
     totalPage: 10,
     data: [
@@ -51,11 +51,11 @@ describe('product api', () => {
   it('should return products page when get products by pageNumber and pageSize', () => {
     http.get<Page<Product[]>>('/products?pageNumber=1&pageSize=10')
       .subscribe(productsResponse => {
-      expect(productsResponse).toEqual(products);
+      expect(productsResponse).toEqual(mockProducts);
     });
     const req = httpTestingController.expectOne('/products?pageNumber=1&pageSize=10');
     expect(req.request.method).toEqual('GET');
-    req.flush(products);
+    req.flush(mockProducts);
   });
 
   it('should return product when get product by id', () => {
