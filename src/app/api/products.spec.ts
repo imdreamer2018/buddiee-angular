@@ -39,19 +39,21 @@ describe('product api', () => {
     imageUrl: 'http://####',
     price: 2.5,
   };
+  const productByIdTestUrl = '/products/1';
   let http: HttpClient;
-  let httpTestingController: HttpTestingController;
 
+  let httpTestingController: HttpTestingController;
   beforeEach(() => {
+
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ]
     });
-
     http = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
   afterEach(() => {
     httpTestingController.verify();
+
   });
 
   it('should return products page when get products by pageNumber and pageSize', () => {
@@ -64,14 +66,12 @@ describe('product api', () => {
     expect(req.request.method).toEqual('GET');
     req.flush(mockProducts);
   });
-
-  const ProductByIdTestUrl = '/products/1';
   it('should return product when get product by id', () => {
-    http.get<Product>(ProductByIdTestUrl)
+    http.get<Product>(productByIdTestUrl)
       .subscribe(productResponse => {
         expect(productResponse).toEqual(mockProduct);
       });
-    const req = httpTestingController.expectOne(ProductByIdTestUrl);
+    const req = httpTestingController.expectOne(productByIdTestUrl);
     expect(req.request.method).toEqual('GET');
     req.flush(mockProduct);
   });
@@ -79,7 +79,7 @@ describe('product api', () => {
   it('should return 404 error when get product by id and product is not existed', () => {
     const emsg = 'can not find basic info of product with id is 1';
 
-    http.get<Product>(ProductByIdTestUrl)
+    http.get<Product>(productByIdTestUrl)
       .subscribe(
         product => fail('should have failed with 404 error'),
         (error: HttpErrorResponse) => {
@@ -88,8 +88,14 @@ describe('product api', () => {
         }
       );
 
-    const req = httpTestingController.expectOne(ProductByIdTestUrl);
+    const req = httpTestingController.expectOne(productByIdTestUrl);
     req.flush(emsg, { status: 404, statusText: emsg});
+  });
+
+  it('delete product by id', () => {
+    http.delete<void>(productByIdTestUrl);
+    const req = httpTestingController.expectOne('/products/1');
+    expect(req.request.method).toEqual('DELETE');
   });
 
   it('should return product info when create product', () => {
