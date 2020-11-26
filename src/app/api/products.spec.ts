@@ -49,21 +49,23 @@ describe('product api', () => {
   });
 
   it('should return products page when get products by pageNumber and pageSize', () => {
-    http.get<Page<Product[]>>('/products?pageNumber=1&pageSize=10')
+    const getProductsTestUrl = '/products?pageNumber=1&pageSize=10';
+    http.get<Page<Product[]>>(getProductsTestUrl)
       .subscribe(productsResponse => {
       expect(productsResponse).toEqual(mockProducts);
     });
-    const req = httpTestingController.expectOne('/products?pageNumber=1&pageSize=10');
+    const req = httpTestingController.expectOne(getProductsTestUrl);
     expect(req.request.method).toEqual('GET');
     req.flush(mockProducts);
   });
 
+  const getProductByIdTestUrl = '/products/1';
   it('should return product when get product by id', () => {
-    http.get<Product>('/products/1')
+    http.get<Product>(getProductByIdTestUrl)
       .subscribe(productResponse => {
         expect(productResponse).toEqual(mockProduct);
       });
-    const req = httpTestingController.expectOne('/products/1');
+    const req = httpTestingController.expectOne(getProductByIdTestUrl);
     expect(req.request.method).toEqual('GET');
     req.flush(mockProduct);
   });
@@ -71,7 +73,7 @@ describe('product api', () => {
   it('should return 404 error when get product by id and product is not existed', () => {
     const emsg = 'can not find basic info of product with id is 1';
 
-    http.get<Product>('/products/1')
+    http.get<Product>(getProductByIdTestUrl)
       .subscribe(
         product => fail('should have failed with 404 error'),
         (error: HttpErrorResponse) => {
@@ -80,7 +82,7 @@ describe('product api', () => {
         }
       );
 
-    const req = httpTestingController.expectOne('/products/1');
+    const req = httpTestingController.expectOne(getProductByIdTestUrl);
     req.flush(emsg, { status: 404, statusText: emsg});
   });
 });
