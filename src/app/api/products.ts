@@ -11,7 +11,7 @@ export class ProductsApi {
   BASE_URL: string;
   header: object;
   constructor(private http: HttpClient) {
-    this.BASE_URL = 'http://127.0.0.1:4200';
+    this.BASE_URL = 'http://127.0.0.1:4200/api';
     this.header = {
       Accept: 'application/json;charset=UTF-8',
      'Content-Type': 'application/json',
@@ -19,11 +19,11 @@ export class ProductsApi {
   }
 
   getProducts(pageNumber: number, pageSize: number): Observable<Page<Product[]>> {
-      return this.http.get<Page<Product[]>>(`${this.BASE_URL}/products?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+      return this.http.get<Page<Product[]>>(`${this.BASE_URL}/products?pageNumber=${pageNumber}&pageSize=${pageSize}`, this.header);
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.BASE_URL}/products/${id}`);
+    return this.http.get<Product>(`${this.BASE_URL}/products/${id}`, this.header);
   }
 
   createProduct(product: Product): Observable<any> {
@@ -31,6 +31,6 @@ export class ProductsApi {
   }
 
   deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`${this.BASE_URL}/products/${id}`);
+    return this.http.delete(`${this.BASE_URL}/products/${id}`, this.header);
   }
 }

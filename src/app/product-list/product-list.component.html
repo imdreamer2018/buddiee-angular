@@ -1,10 +1,10 @@
 <button nz-button nzType="primary" (click)="onCreateProduct()">添加商品</button>
 <div class="product-list">
-  <app-product *ngFor="let product of products.data" [product]="product" ></app-product>
+  <app-product *ngFor="let product of products?.data" [product]="product" ></app-product>
 </div>
 <nz-pagination class="product-list-pagination"
-               [nzPageIndex]="products.currentPage"
-               [nzTotal]="products.totalPage * 10"
+               [nzPageIndex]="products?.currentPage"
+               [nzTotal]="products?.totalPage * 10"
                (nzPageIndexChange)="pageIndexChange($event)"
 >
 </nz-pagination>

@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "bignumber.js"
+            ],
             "outputPath": "dist/buddiee-website",
             "index": "src/index.html",
             "main": "src/main.ts",
