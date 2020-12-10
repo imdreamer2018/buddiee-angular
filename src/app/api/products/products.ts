@@ -4,14 +4,15 @@ import {Page} from '../../page';
 import {Product} from '../../product';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {BASE_URL, Header} from '../options';
+import {Header} from '../options';
 import {handleError} from '../handleError';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsApi {
-  BASE_URL = BASE_URL;
+  BASE_URL = environment.apiUrl;
   header: Header = {
     headers: new HttpHeaders({
       Accept: 'application/json;charset=UTF-8',
