@@ -1,6 +1,6 @@
 import { ProductsService } from './products.service';
 import {Product} from '../product';
-import {ProductsApi} from '../api/products';
+import {ProductsApi} from '../api/products/products';
 import {Page} from '../page';
 import {of} from 'rxjs';
 import BigNumber from 'bignumber.js';

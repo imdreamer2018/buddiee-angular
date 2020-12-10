@@ -2,8 +2,8 @@ import { HttpClientTestingModule, HttpTestingController} from '@angular/common/h
 
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Page} from '../page';
-import {Product} from '../product';
+import {Page} from '../../page';
+import {Product} from '../../product';
 import BigNumber from 'bignumber.js';
 
 describe('product api', () => {

@@ -1,20 +1,17 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Page} from '../page';
-import {Product} from '../product';
-import {Observable, throwError} from 'rxjs';
+import {Page} from '../../page';
+import {Product} from '../../product';
+import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-
-interface Header {
-  headers: any;
-  params?: any;
-}
+import {BASE_URL, Header} from '../options';
+import {handleError} from '../handleError';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsApi {
-  BASE_URL = 'http://localhost:4200/api';
+  BASE_URL = BASE_URL;
   header: Header = {
     headers: new HttpHeaders({
       Accept: 'application/json;charset=UTF-8',
@@ -22,20 +19,6 @@ export class ProductsApi {
     })
   };
   constructor(private http: HttpClient) {
-  }
-
-  private handleError(error: HttpErrorResponse): Observable<any> {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    }
-    else {
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    return throwError(
-      'Something bad happened; please try again later.'
-    );
   }
 
   getProducts(pageNumber: number, pageSize: number): Observable<Page<Product[]>> {
@@ -50,7 +33,7 @@ export class ProductsApi {
   getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.BASE_URL}/products/${id}`, this.header)
       .pipe(
-        catchError(this.handleError)
+        catchError(handleError)
       );
   }
 
