@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {NzUploadChangeParam, NzUploadFile} from 'ng-zorro-antd/upload';
-import {getFileBase64} from '../../util/geFileBase64';
-import {ProductsService} from '../../service/products.service';
+import {getFileBase64} from '../../../util/geFileBase64';
+import {ProductsService} from '../../../service/products.service';
 import {Router} from '@angular/router';
 import BigNumber from 'bignumber.js';
 

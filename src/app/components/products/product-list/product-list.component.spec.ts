@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductListComponent } from './product-list.component';
-import {Page} from '../../page';
-import {Product} from '../../product';
+import {Page} from '../../../page';
+import {Product} from '../../../product';
 import BigNumber from 'bignumber.js';
 import {Router} from '@angular/router';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
