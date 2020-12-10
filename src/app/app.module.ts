@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
@@ -29,6 +29,10 @@ import {NzUploadModule} from 'ng-zorro-antd/upload';
 import {NzMessageModule} from 'ng-zorro-antd/message';
 import {NzTypographyModule} from 'ng-zorro-antd/typography';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
+import { LoginComponent } from './components/login/login.component';
+import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
+import {JwtInterceptor} from './helpers/JwtInterceptor';
+import {ErrorInterceptor} from './helpers/ErrorInterceptor';
 
 registerLocaleData(zh);
 
@@ -38,7 +42,8 @@ registerLocaleData(zh);
     ProductListComponent,
     ProductDetailComponent,
     ProductComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,7 @@ registerLocaleData(zh);
     NzButtonModule,
     NzModalModule,
     NzFormModule,
+    NzCheckboxModule,
     ReactiveFormsModule,
     NzInputModule,
     NzInputNumberModule,
@@ -63,7 +69,11 @@ registerLocaleData(zh);
     NzTypographyModule,
     NzPopconfirmModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

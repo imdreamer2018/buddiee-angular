@@ -1,11 +1,12 @@
 <!-- NG-ZORRO -->
 <nz-layout class="layout">
-  <nz-header>
+  <nz-header *ngIf="currentUser">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
       <li nz-menu-item (click)="gotoLink('/')">首页</li>
       <li nz-menu-item (click)="gotoLink('/products')">商品</li>
-      <li nz-menu-item>待补充</li>
+      <li nz-menu-item (click)="logout()">注销</li>
+      <li nz-menu-item>欢迎{{currentUser.username}}用户</li>
     </ul>
   </nz-header>
   <nz-content>
