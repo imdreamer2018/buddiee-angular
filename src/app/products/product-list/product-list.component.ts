@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Page} from '../page';
-import {Product} from '../product';
+import {Page} from '../../page';
+import {Product} from '../../product';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {selectorProducts} from '../store/selectors/products.selector';
-import {loadProducts} from '../store/actions/products.action';
+import {selectorProducts} from '../../store/selectors/products.selector';
+import {loadProducts} from '../../store/actions/products.action';
 
 @Component({
   selector: 'app-product-list',

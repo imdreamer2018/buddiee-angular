@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product} from '../product';
+import {Product} from '../../product';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {Router} from '@angular/router';
-import {ProductsService} from '../service/products.service';
+import {ProductsService} from '../../service/products.service';
 
 @Component({
   selector: 'app-product',

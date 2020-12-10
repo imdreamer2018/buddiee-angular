@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from '../product';
+import {Product} from '../../product';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {selectorProduct} from '../store/selectors/products.selector';
+import {selectorProduct} from '../../store/selectors/products.selector';
 import {map} from 'rxjs/operators';
-import {loadProduct} from '../store/actions/products.action';
+import {loadProduct} from '../../store/actions/products.action';
 
 @Component({
   selector: 'app-product-detail',

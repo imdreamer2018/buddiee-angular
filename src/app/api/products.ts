@@ -1,29 +1,57 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Page} from '../page';
 import {Product} from '../product';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+
+interface Header {
+  headers: any;
+  params?: any;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsApi {
-  BASE_URL: string;
-  header: object;
-  constructor(private http: HttpClient) {
-    this.BASE_URL = 'http://127.0.0.1:4200/api';
-    this.header = {
+  BASE_URL = 'http://localhost:4200/api';
+  header: Header = {
+    headers: new HttpHeaders({
       Accept: 'application/json;charset=UTF-8',
-     'Content-Type': 'application/json',
-    };
+      'Content-Type': 'application/json',
+    })
+  };
+  constructor(private http: HttpClient) {
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<any> {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    }
+    else {
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    return throwError(
+      'Something bad happened; please try again later.'
+    );
   }
 
   getProducts(pageNumber: number, pageSize: number): Observable<Page<Product[]>> {
-      return this.http.get<Page<Product[]>>(`${this.BASE_URL}/products?pageNumber=${pageNumber}&pageSize=${pageSize}`, this.header);
+    if (pageNumber && pageSize) {
+      this.header.params =  new HttpParams()
+        .set('pageNumber', pageNumber.toString())
+        .set('pageSize', pageSize.toString());
+    }
+    return this.http.get<Page<Product[]>>(`${this.BASE_URL}/products`, this.header);
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.BASE_URL}/products/${id}`, this.header);
+    return this.http.get<Product>(`${this.BASE_URL}/products/${id}`, this.header)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   createProduct(product: Product): Observable<any> {
